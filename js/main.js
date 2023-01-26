@@ -29,6 +29,7 @@ function flipCard() { /* Função para virar cards, adicionando classe flip*/
         if (!flipped) {
             flipped= true;
             firstCard = this;
+            firstCard.removeEventListener('click', flipCard)
         } 
         else {
             flipped = false;
@@ -50,6 +51,7 @@ function cardMismatch() { /* retorna os cards que não são iguais a suas posiç
     setTimeout(() => {
         firstCard.classList.remove('memoryGame__card--flip');
         secondCard.classList.remove('memoryGame__card--flip');
+        firstCard.addEventListener('click', flipCard)
         freezeCards();
     }, 600);
 }
@@ -63,7 +65,6 @@ function cardMismatch() { /* retorna os cards que não são iguais a suas posiç
 
 function freezeCards(isMatch = false) { /* Tranca cards ao encontrar pares iguais, do contrário, reseta os valores de primeiro e segundo card */
     if(isMatch){
-        firstCard.removeEventListener('click', flipCard);
         secondCard.removeEventListener('click', flipCard);
         firstCard.classList.add('memoryGame__card--match');
         secondCard.classList.add('memoryGame__card--match');
